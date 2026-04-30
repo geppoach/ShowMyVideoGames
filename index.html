@@ -1,0 +1,406 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+:root {
+  --bg: #f0f4ff;
+  --surface: #e8eef8;
+  --card: #ffffff;
+  --accent: #2563eb;
+  --accent2: #7c3aed;
+  --text: #1e2a45;
+  --muted: #5a6a88;
+  --border: rgba(37,99,235,0.15);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; }
+.site { min-height: 100vh; background: linear-gradient(160deg, #dbeafe 0%, #f0f4ff 30%, #ede9fe 100%); }
+
+.header { text-align: center; padding: 2.5rem 1.5rem 2rem; position: relative; border-bottom: 1px solid rgba(37,99,235,0.12); background: rgba(255,255,255,0.6); }
+.header::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 500px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent); }
+.logo { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: 0.18em; background: linear-gradient(135deg, #1d4ed8, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+.tagline { font-size: 0.78rem; letter-spacing: 0.3em; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; }
+.wave-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); margin: 0.8rem auto 0; border-radius: 2px; }
+.nav { display: flex; justify-content: center; gap: 2rem; padding: 0.9rem 1.5rem; background: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(37,99,235,0.08); flex-wrap: wrap; }
+.nav a { font-size: 0.78rem; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; text-transform: uppercase; }
+.nav a:hover { color: var(--accent); }
+
+.section { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+.section-title { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ===== How To Play ===== */
+.howto-wrap {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(37,99,235,0.1);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.howto-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  position: relative;
+}
+.step {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: '▶';
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translateY(-60%);
+  color: #bfdbfe;
+  font-size: 1rem;
+  z-index: 1;
+}
+.step-num {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem; font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+.step-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.step-label {
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.step-desc {
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.step-desc code {
+  font-family: 'Courier New', monospace;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.68rem;
+}
+
+.howto-note {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1.1rem;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  line-height: 1.7;
+  color: #92400e;
+  display: flex; gap: 0.6rem; align-items: flex-start;
+}
+.note-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== PV Section ===== */
+.pv-section { background: rgba(255,255,255,0.55); border: 1px solid rgba(37,99,235,0.1); border-radius: 16px; padding: 2rem; margin-bottom: 2.5rem; }
+.pv-main { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+@media (max-width: 640px) { .pv-main { grid-template-columns: 1fr; } }
+.pv-player { aspect-ratio: 16/9; background: #0f172a; border-radius: 10px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(37,99,235,0.18); }
+.pv-player video { width: 100%; height: 100%; object-fit: cover; display: none; }
+.pv-player video.active { display: block; }
+.pv-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #94a3b8; }
+.pv-placeholder.hidden { display: none; }
+.play-icon { width: 52px; height: 52px; background: rgba(37,99,235,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(37,99,235,0.4); }
+.play-icon::after { content: '▶'; font-size: 18px; color: #93c5fd; margin-left: 3px; }
+.pv-placeholder p { font-size: 0.75rem; letter-spacing: 0.1em; }
+.pv-info { display: flex; flex-direction: column; gap: 0.8rem; }
+.pv-info-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.pv-info-desc { font-size: 0.78rem; line-height: 1.75; color: #374151; }
+.pv-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.4rem; }
+.pv-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.8rem; background: var(--bg); border: 1px solid rgba(37,99,235,0.1); border-radius: 8px; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.pv-item:hover { background: #eff6ff; border-color: rgba(37,99,235,0.25); }
+.pv-item.active { background: #eff6ff; border-color: rgba(37,99,235,0.35); }
+.pv-thumb { width: 72px; height: 42px; border-radius: 5px; flex-shrink: 0; background: #dbeafe; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.pv-thumb-placeholder { font-size: 0.6rem; color: var(--muted); }
+.pv-item-info { flex: 1; min-width: 0; }
+.pv-item-title { font-size: 0.78rem; font-weight: 700; color: var(--text); font-family: 'Cinzel', serif; }
+.pv-item-sub { font-size: 0.67rem; color: var(--muted); margin-top: 2px; }
+.pv-badge { font-size: 0.6rem; padding: 1px 6px; border-radius: 20px; font-weight: 700; white-space: nowrap; }
+.pb-hard { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+.pb-normal { background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; }
+.pb-easy { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; }
+
+/* ===== Game Grid ===== */
+.game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.game-card { background: var(--card); border: 1px solid rgba(37,99,235,0.12); border-radius: 14px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; position: relative; box-shadow: 0 2px 12px rgba(37,99,235,0.06); }
+.game-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(37,99,235,0.13); }
+.game-card.wip { opacity: 0.7; }
+.thumb-wrap { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; background: var(--surface); }
+.thumb-slides { display: flex; width: 300%; height: 100%; transition: transform 0.45s ease; }
+.thumb-slide { width: 33.333%; height: 100%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.thumb-slide img { width: 100%; height: 100%; object-fit: cover; }
+.ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.ph-icon { font-size: 2rem; }
+.ph-label { font-size: 0.62rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+.s1 .ph { background: linear-gradient(135deg, #dbeafe, #ede9fe); }
+.s2 .ph { background: linear-gradient(135deg, #dcfce7, #d1fae5); }
+.s3 .ph { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+.s4 .ph { background: linear-gradient(135deg, #f3e8ff, #ede9fe); }
+.slide-dots { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 2; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+.dot.active { background: #fff; transform: scale(1.3); }
+.slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; font-size: 11px; color: var(--text); transition: background 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+.slide-arrow:hover { background: #fff; }
+.slide-arrow.prev { left: 7px; }
+.slide-arrow.next { right: 7px; }
+.card-body { padding: 1.1rem 1.2rem; }
+.card-meta { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.badge { font-size: 0.62rem; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
+.badge-hard { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+.badge-normal { background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; }
+.badge-easy { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; }
+.badge-unknown { background: #f3e8ff; color: #7c3aed; border: 1px solid #c4b5fd; }
+.badge-year { background: #eff6ff; color: #3b82f6; border: 1px solid #bfdbfe; }
+.badge-wip { background: #f5f3ff; color: #7c3aed; border: 1px solid #c4b5fd; }
+.card-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+.card-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.65rem; }
+.card-desc { font-size: 0.75rem; line-height: 1.75; color: #374151; margin-bottom: 0.85rem; }
+.new-features { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 0.85rem; }
+.feature-tag { font-size: 0.62rem; padding: 2px 7px; background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; border-radius: 4px; }
+.dl-buttons { display: flex; flex-direction: column; gap: 0.4rem; }
+.dl-btn { display: flex; align-items: center; justify-content: space-between; padding: 0.52rem 0.85rem; border-radius: 8px; border: none; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 0.72rem; font-weight: 700; transition: filter 0.15s, transform 0.1s; }
+.dl-btn:hover { filter: brightness(0.95); transform: scale(1.01); }
+.dl-btn:active { transform: scale(0.98); }
+.dl-btn-normal { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.dl-btn-easy-mode { background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+.dl-btn-wip { background: #f9fafb; color: #9ca3af; border: 1px solid #e5e7eb; cursor: not-allowed; }
+.dl-btn-wip:hover { filter: none; transform: none; }
+.btn-lv { font-size: 0.6rem; opacity: 0.7; font-weight: 400; }
+.wip-badge { position: absolute; top: 10px; right: 10px; background: rgba(124,58,237,0.9); color: #fff; font-size: 0.62rem; padding: 2px 9px; border-radius: 20px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
+.footer { text-align: center; padding: 1.8rem; border-top: 1px solid rgba(37,99,235,0.1); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; background: rgba(255,255,255,0.4); }
+</style>
+
+<div class="site">
+  <header class="header">
+    <div class="logo">STEAM GEPPO</div>
+    <div class="tagline">Indie Game Distribution · Tales Series</div>
+    <div class="wave-line"></div>
+  </header>
+  <nav class="nav">
+    <a href="#">ゲーム一覧</a>
+    <a href="#">プロモーション動画</a>
+    <a href="#">遊び方</a>
+    <a href="#">制作について</a>
+    <a href="#">お問い合わせ</a>
+  </nav>
+
+  <main class="section">
+
+    <!-- PV -->
+    <div class="section-title">Promotion Video</div>
+    <div class="pv-section">
+      <div class="pv-main">
+        <div class="pv-player" id="pv-player">
+          <video id="pv-video" controls></video>
+          <div class="pv-placeholder" id="pv-ph">
+            <div class="play-icon"></div>
+            <p>左のリストから動画を選択</p>
+          </div>
+        </div>
+        <div class="pv-info">
+          <div class="pv-info-title" id="pv-title">TALES SERIES — PV</div>
+          <div class="pv-info-desc" id="pv-desc">各タイトルのプロモーションビデオをご覧いただけます。タイトルを選択して再生してください。</div>
+          <div class="pv-list">
+            <div class="pv-item active" onclick="selectPV(0)">
+              <div class="pv-thumb"><div class="pv-thumb-placeholder">SLAKE</div></div>
+              <div class="pv-item-info"><div class="pv-item-title">TALES OF SLAKE</div><div class="pv-item-sub">2025.03 ／ 相模湖〜名古屋</div></div>
+              <span class="pv-badge pb-hard">Hard</span>
+            </div>
+            <div class="pv-item" onclick="selectPV(1)">
+              <div class="pv-thumb"><div class="pv-thumb-placeholder">KLAKE</div></div>
+              <div class="pv-item-info"><div class="pv-item-title">TALES OF KLAKE</div><div class="pv-item-sub">2025.05 ／ 土浦</div></div>
+              <span class="pv-badge pb-normal">Normal</span>
+            </div>
+            <div class="pv-item" onclick="selectPV(2)">
+              <div class="pv-thumb"><div class="pv-thumb-placeholder">PLAKE</div></div>
+              <div class="pv-item-info"><div class="pv-item-title">TALES OF PLAKE</div><div class="pv-item-sub">2025.08 ／ 三重</div></div>
+              <span class="pv-badge pb-easy">Easy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How To Play -->
+    <div class="section-title">How To Play</div>
+    <div class="howto-wrap">
+      <div class="howto-steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-icon">⬇️</div>
+          <div class="step-label">ZIPをダウンロード</div>
+          <div class="step-desc">遊びたいタイトルの「通常」または「楽々冒険モード」ボタンを押してZIPファイルをダウンロードします。</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-icon">📦</div>
+          <div class="step-label">ZIPを展開する</div>
+          <div class="step-desc">ダウンロードしたZIPファイルを右クリック →「すべて展開」でお好みの場所に展開してください。</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-icon">📁</div>
+          <div class="step-label">フォルダを開く</div>
+          <div class="step-desc">展開されたフォルダを開きます。<code>icon/</code> <code>img/</code> <code>movies/</code> などのフォルダと一緒に<code>Game.exe</code>があります。</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-icon">🎮</div>
+          <div class="step-label">Game.exe を起動</div>
+          <div class="step-desc"><code>Game.exe</code> をダブルクリックしてゲームを起動します。冒険の始まりをお楽しみください！</div>
+        </div>
+
+      </div>
+
+      <div class="howto-note">
+        <span class="note-icon">⚠️</span>
+        <span>Windows のセキュリティ警告（「WindowsによってPCが保護されました」）が表示された場合は、「詳細情報」→「実行」をクリックすると起動できます。ウイルス等は含まれておりませんのでご安心ください。</span>
+      </div>
+    </div>
+
+    <!-- Game Grid -->
+    <div class="section-title">Game Library</div>
+    <div class="game-grid">
+
+      <div class="game-card s1">
+        <div class="thumb-wrap">
+          <div class="thumb-slides" id="slides-1">
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">⚔️</span><span class="ph-label">Screenshot 1</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🗺️</span><span class="ph-label">Screenshot 2</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">✨</span><span class="ph-label">Screenshot 3</span></div></div>
+          </div>
+          <button class="slide-arrow prev" onclick="slide('1',-1)">◀</button>
+          <button class="slide-arrow next" onclick="slide('1',1)">▶</button>
+          <div class="slide-dots" id="dots-1"><button class="dot active" onclick="goSlide('1',0)"></button><button class="dot" onclick="goSlide('1',1)"></button><button class="dot" onclick="goSlide('1',2)"></button></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="badge badge-hard">Hard</span><span class="badge badge-year">2025.03</span></div>
+          <div class="card-title">TALES OF SLAKE</div>
+          <div class="card-sub">主人公：カズマ ／ 舞台：相模湖〜名古屋</div>
+          <div class="card-desc">相模湖に暮らす自営業の男・カズマは、謎の声に導かれ3枚のカードを集める旅へ。妹のリホコとその彼氏リョータを巻き込みながら、相模湖・八王子・土浦・名古屋をめぐる壮大な冒険の果てに待ち受ける真実とは。</div>
+          <div class="dl-buttons">
+            <button class="dl-btn dl-btn-normal"><span>⬇ 通常ダウンロード</span><span class="btn-lv">LV1スタート</span></button>
+            <button class="dl-btn dl-btn-easy-mode"><span>★ 楽々冒険モード</span><span class="btn-lv">ほぼLVMAX</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card s2">
+        <div class="thumb-wrap">
+          <div class="thumb-slides" id="slides-2">
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🏙️</span><span class="ph-label">Screenshot 1</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">👨‍👩‍👧</span><span class="ph-label">Screenshot 2</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">📋</span><span class="ph-label">Screenshot 3</span></div></div>
+          </div>
+          <button class="slide-arrow prev" onclick="slide('2',-1)">◀</button>
+          <button class="slide-arrow next" onclick="slide('2',1)">▶</button>
+          <div class="slide-dots" id="dots-2"><button class="dot active" onclick="goSlide('2',0)"></button><button class="dot" onclick="goSlide('2',1)"></button><button class="dot" onclick="goSlide('2',2)"></button></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="badge badge-normal">Normal</span><span class="badge badge-year">2025.05</span></div>
+          <div class="card-title">TALES OF KLAKE</div>
+          <div class="card-sub">主人公：ミチヒロ ／ 舞台：土浦</div>
+          <div class="card-desc">土浦に暮らす会社員・ミチヒロ。ある日突然の部署解体が人生を一変させる。市役所の依頼をこなしながら成長し、妻アオイと子供たちとの家族の絆を武器に強大な悪へ立ち向かっていく。</div>
+          <div class="new-features"><span class="feature-tag">NEW: クエスト請負システム</span><span class="feature-tag">NEW: ミニゲーム多数</span></div>
+          <div class="dl-buttons">
+            <button class="dl-btn dl-btn-normal"><span>⬇ 通常ダウンロード</span><span class="btn-lv">LV1スタート</span></button>
+            <button class="dl-btn dl-btn-easy-mode"><span>★ 楽々冒険モード</span><span class="btn-lv">ほぼLVMAX</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card s3">
+        <div class="thumb-wrap">
+          <div class="thumb-slides" id="slides-3">
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🌿</span><span class="ph-label">Screenshot 1</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">💍</span><span class="ph-label">Screenshot 2</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🎯</span><span class="ph-label">Screenshot 3</span></div></div>
+          </div>
+          <button class="slide-arrow prev" onclick="slide('3',-1)">◀</button>
+          <button class="slide-arrow next" onclick="slide('3',1)">▶</button>
+          <div class="slide-dots" id="dots-3"><button class="dot active" onclick="goSlide('3',0)"></button><button class="dot" onclick="goSlide('3',1)"></button><button class="dot" onclick="goSlide('3',2)"></button></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="badge badge-easy">Easy</span><span class="badge badge-year">2025.08</span></div>
+          <div class="card-title">TALES OF PLAKE</div>
+          <div class="card-sub">主人公：マサキ ／ 舞台：三重</div>
+          <div class="card-desc">三重に暮らすマサキは、地元の女性と結婚したばかりの幸せな会社員。趣味のポイ活に励む平穏な日々の中、コツコツ貯めたポイントが思わぬかたちで人生を動かしていく日常系ハートフルRPG。</div>
+          <div class="new-features"><span class="feature-tag">NEW: スキルポイントシステム</span></div>
+          <div class="dl-buttons">
+            <button class="dl-btn dl-btn-normal"><span>⬇ 通常ダウンロード</span><span class="btn-lv">LV1スタート</span></button>
+            <button class="dl-btn dl-btn-easy-mode"><span>★ 楽々冒険モード</span><span class="btn-lv">ほぼLVMAX</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card s4 wip">
+        <div class="wip-badge">制作中</div>
+        <div class="thumb-wrap">
+          <div class="thumb-slides">
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🔮</span><span class="ph-label">Coming Soon</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">❓</span><span class="ph-label">Coming Soon</span></div></div>
+            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🌌</span><span class="ph-label">Coming Soon</span></div></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="badge badge-unknown">難易度 ？</span><span class="badge badge-wip">Coming Soon</span></div>
+          <div class="card-title">TALES OF YRLAKE</div>
+          <div class="card-sub">現在鋭意制作中...</div>
+          <div class="card-desc">新たな物語が幕を開ける。詳細は続報をお待ちください。</div>
+          <div class="dl-buttons">
+            <button class="dl-btn dl-btn-wip" disabled><span>⬇ 通常ダウンロード</span><span class="btn-lv">準備中</span></button>
+            <button class="dl-btn dl-btn-wip" disabled><span>★ 楽々冒険モード</span><span class="btn-lv">準備中</span></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="footer">© 2025 STEAM GEPPO — All Rights Reserved</footer>
+</div>
+
+<script>
+const pvData = [
+  { title: 'TALES OF SLAKE', desc: '相模湖に暮らす自営業の男・カズマが謎の声に導かれ旅立つ、シリーズ第1作のプロモーションビデオ。', src: 'videos/slake_pv.mp4' },
+  { title: 'TALES OF KLAKE', desc: '突然の部署解体から始まるミチヒロの物語。家族の絆と成長を描いたシリーズ第2作のプロモーションビデオ。', src: 'videos/klake_pv.mp4' },
+  { title: 'TALES OF PLAKE', desc: 'ポイ活が人生を動かす、三重を舞台にした日常系ハートフルRPG。シリーズ第3作のプロモーションビデオ。', src: 'videos/plake_pv.mp4' },
+];
+function selectPV(idx) {
+  document.querySelectorAll('.pv-item').forEach((el,i) => el.classList.toggle('active', i === idx));
+  document.getElementById('pv-title').textContent = pvData[idx].title + ' — PV';
+  document.getElementById('pv-desc').textContent = pvData[idx].desc;
+  const video = document.getElementById('pv-video');
+  video.src = pvData[idx].src;
+  video.style.display = 'block';
+  document.getElementById('pv-ph').classList.add('hidden');
+  video.play();
+}
+const state = {};
+function goSlide(id, idx) {
+  state[id] = idx;
+  document.getElementById('slides-' + id).style.transform = 'translateX(-' + (idx * 33.333) + '%)';
+  document.querySelectorAll('#dots-' + id + ' .dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+}
+function slide(id, dir) {
+  goSlide(id, Math.max(0, Math.min(2, (state[id] || 0) + dir)));
+}
+['1','2','3'].forEach(id => { state[id] = 0; });
+</script>
