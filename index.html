@@ -362,8 +362,9 @@
     <div class="pv-section">
       <div class="pv-main">
         <div class="pv-player" id="pv-player">
-          <!-- YouTube iframes (追加したらここに増やす) -->
+          <!-- YouTube iframes -->
           <iframe id="pv-frame-0" data-src="https://www.youtube.com/embed/xJ3yoENwoDc?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+          <iframe id="pv-frame-1" data-src="https://www.youtube.com/embed/S71jYdf1SjI?autoplay=1" allowfullscreen allow="autoplay"></iframe>
           <div class="pv-placeholder" id="pv-ph">
             <div class="play-icon">▶</div>
             <p>右のリストから動画を選択</p>
@@ -384,11 +385,11 @@
               </div>
               <span class="pv-badge pb-hard">Hard</span>
             </div>
-            <div class="pv-item pv-item-disabled">
+            <div class="pv-item" onclick="selectPV(1)">
               <div class="pv-thumb"><div class="pv-thumb-ph">KLAKE</div></div>
               <div class="pv-item-info">
                 <div class="pv-item-title">TALES OF KLAKE</div>
-                <div class="pv-item-sub">2025.05 ／ 土浦 — 動画準備中</div>
+                <div class="pv-item-sub">2025.05 ／ 土浦</div>
               </div>
               <span class="pv-badge pb-normal">Normal</span>
             </div>
@@ -609,9 +610,14 @@
       frameId: 'pv-frame-0',
       title: 'TALES OF SLAKE — PV',
       desc: '相模湖に暮らす自営業の男・カズマが謎の声に導かれ旅立つ、シリーズ第1作のプロモーションビデオ。'
+    },
+    {
+      frameId: 'pv-frame-1',
+      title: 'TALES OF KLAKE — PV',
+      desc: '突然の部署解体から始まるミチヒロの物語。家族の絆と成長を描いたシリーズ第2作のプロモーションビデオ。'
     }
-    // KLAKE, PLAKEのPV URLが決まったらここに追加:
-    // { frameId: 'pv-frame-1', title: 'TALES OF KLAKE — PV', desc: '...' }
+    // PLAKEのPV URLが決まったらここに追加:
+    // { frameId: 'pv-frame-2', title: 'TALES OF PLAKE — PV', desc: '...' }
   ];
 
   function selectPV(idx) {
