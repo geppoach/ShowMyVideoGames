@@ -253,7 +253,7 @@
     .thumb-wrap { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; background: var(--surface); }
     .thumb-slides { display: flex; width: 300%; height: 100%; transition: transform 0.45s ease; }
     .thumb-slide { width: 33.333%; height: 100%; flex-shrink: 0; }
-    .thumb-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb-slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
     .ph {
       width: 100%; height: 100%;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
@@ -386,7 +386,10 @@
               <span class="pv-badge pb-hard">Hard</span>
             </div>
             <div class="pv-item" onclick="selectPV(1)">
-              <div class="pv-thumb"><div class="pv-thumb-ph">KLAKE</div></div>
+              <div class="pv-thumb">
+                <img src="images/KLAKE_1.png" alt="KLAKE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="pv-thumb-ph" style="display:none">KLAKE</div>
+              </div>
               <div class="pv-item-info">
                 <div class="pv-item-title">TALES OF KLAKE</div>
                 <div class="pv-item-sub">2025.05 ／ 土浦</div>
