@@ -237,6 +237,107 @@
     /* ===== Game Grid ===== */
     .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
 
+    /* YRLAKE featured banner */
+    .yrlake-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 50%, #1e1b4b 100%);
+      border: 2px solid rgba(167,139,250,0.4);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 4px 32px rgba(124,58,237,0.2);
+      margin-bottom: 1.5rem;
+    }
+    .yrlake-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(167,139,250,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .yrlake-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 260px;
+    }
+    @media (max-width: 700px) { .yrlake-inner { grid-template-columns: 1fr; } }
+    .yrlake-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.2);
+      min-height: 200px;
+    }
+    .yrlake-coming-soon {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; padding: 2rem;
+    }
+    .yrlake-icon { font-size: 4rem; opacity: 0.6; }
+    .yrlake-cs-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem; letter-spacing: 0.4em;
+      color: #a78bfa; text-transform: uppercase;
+    }
+    .yrlake-info {
+      padding: 2rem 2.5rem;
+      display: flex; flex-direction: column; justify-content: center; gap: 1rem;
+    }
+    .yrlake-wip-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(167,139,250,0.2);
+      border: 1px solid rgba(167,139,250,0.4);
+      color: #c4b5fd;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      width: fit-content;
+    }
+    .yrlake-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      color: #f5f3ff;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+    .yrlake-title span {
+      background: linear-gradient(135deg, #a78bfa, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .yrlake-desc {
+      font-size: 0.8rem; line-height: 1.8;
+      color: #c4b5fd;
+    }
+    .yrlake-pv-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.6rem 1.2rem;
+      background: rgba(167,139,250,0.15);
+      border: 1px solid rgba(167,139,250,0.35);
+      border-radius: 8px;
+      color: #c4b5fd;
+      font-size: 0.75rem; font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      width: fit-content;
+    }
+    .yrlake-pv-btn:hover { background: rgba(167,139,250,0.25); }
+    .yrlake-pv-btn.disabled { opacity: 0.45; cursor: not-allowed; }
+    .yrlake-pv-btn.disabled:hover { background: rgba(167,139,250,0.15); }
+    .yrlake-dl-row {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .yrlake-dl-btn {
+      flex: 1; min-width: 140px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 0.9rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(167,139,250,0.2);
+      border-radius: 8px;
+      color: #6b7280;
+      font-size: 0.7rem; font-weight: 700;
+      cursor: not-allowed;
+    }
+
     .game-card {
       background: var(--card);
       border: 1px solid rgba(37,99,235,0.12);
@@ -365,6 +466,8 @@
           <!-- YouTube iframes -->
           <iframe id="pv-frame-0" data-src="https://www.youtube.com/embed/WF0Z2clIyvY?autoplay=1" allowfullscreen allow="autoplay"></iframe>
           <iframe id="pv-frame-1" data-src="https://www.youtube.com/embed/xc5NnFNeRhY?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+          <iframe id="pv-frame-2" data-src="https://www.youtube.com/embed/jNn2n55HANk?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+          <iframe id="pv-frame-3" data-src="" allowfullscreen allow="autoplay"></iframe>
           <div class="pv-placeholder" id="pv-ph">
             <div class="play-icon">▶</div>
             <p>右のリストから動画を選択</p>
@@ -396,13 +499,24 @@
               </div>
               <span class="pv-badge pb-normal">Normal</span>
             </div>
-            <div class="pv-item pv-item-disabled">
-              <div class="pv-thumb"><div class="pv-thumb-ph">PLAKE</div></div>
+            <div class="pv-item" onclick="selectPV(2)">
+              <div class="pv-thumb">
+                <img src="images/PLAKE_1.png" alt="PLAKE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="pv-thumb-ph" style="display:none">PLAKE</div>
+              </div>
               <div class="pv-item-info">
                 <div class="pv-item-title">TALES OF PLAKE</div>
-                <div class="pv-item-sub">2025.08 ／ 三重 — 動画準備中</div>
+                <div class="pv-item-sub">2025.08 ／ 三重</div>
               </div>
               <span class="pv-badge pb-easy">Easy</span>
+            </div>
+            <div class="pv-item pv-item-disabled" style="opacity:0.6; cursor:not-allowed;">
+              <div class="pv-thumb"><div class="pv-thumb-ph">YRLAKE</div></div>
+              <div class="pv-item-info">
+                <div class="pv-item-title">TALES OF YRLAKE</div>
+                <div class="pv-item-sub">PV 制作中...</div>
+              </div>
+              <span class="pv-badge pb-wip">Coming Soon</span>
             </div>
           </div>
         </div>
@@ -446,6 +560,29 @@
 
     <!-- ===== Game Library ===== -->
     <div id="games" class="section-title">Game Library</div>
+    <!-- YRLAKE Featured Banner -->
+    <div class="yrlake-banner">
+      <div class="yrlake-inner">
+        <div class="yrlake-visual">
+          <div class="yrlake-coming-soon">
+            <div class="yrlake-icon">🔮</div>
+            <div class="yrlake-cs-text">Coming Soon</div>
+          </div>
+        </div>
+        <div class="yrlake-info">
+          <div class="yrlake-wip-badge">🔥 鋭意開発中</div>
+          <div class="yrlake-title">TALES OF<br><span>YRLAKE</span></div>
+          <div class="yrlake-desc">シリーズ最大規模の新作、鋭意開発中。過去三作を超える壮大な物語が幕を開ける。続報をお待ちください。</div>
+          <div class="yrlake-pv-btn disabled">▶ PV 公開準備中</div>
+          <div class="yrlake-dl-row">
+            <div class="yrlake-dl-btn"><span>⬇ 通常ダウンロード</span><span style="font-size:0.6rem;opacity:0.6">準備中</span></div>
+            <div class="yrlake-dl-btn"><span>★ 楽々冒険モード</span><span style="font-size:0.6rem;opacity:0.6">準備中</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Grid (過去3作) -->
     <div class="game-grid">
 
       <!-- TALES OF SLAKE -->
@@ -560,31 +697,6 @@
         </div>
       </div>
 
-      <!-- TALES OF YRLAKE (WIP) -->
-      <div class="game-card s4 wip">
-        <div class="wip-badge">制作中</div>
-        <div class="thumb-wrap">
-          <div class="thumb-slides">
-            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🔮</span><span class="ph-label">Coming Soon</span></div></div>
-            <div class="thumb-slide"><div class="ph"><span class="ph-icon">❓</span><span class="ph-label">Coming Soon</span></div></div>
-            <div class="thumb-slide"><div class="ph"><span class="ph-icon">🌌</span><span class="ph-label">Coming Soon</span></div></div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="badge badge-unknown">難易度 ？</span>
-            <span class="badge badge-wip">Coming Soon</span>
-          </div>
-          <div class="card-title">TALES OF YRLAKE</div>
-          <div class="card-sub">現在鋭意制作中...</div>
-          <div class="card-desc">新たな物語が幕を開ける。詳細は続報をお待ちください。</div>
-          <div class="dl-buttons">
-            <span class="dl-btn dl-btn-wip"><span>⬇ 通常ダウンロード</span><span class="btn-lv">準備中</span></span>
-            <span class="dl-btn dl-btn-wip"><span>★ 楽々冒険モード</span><span class="btn-lv">準備中</span></span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </main>
 
@@ -618,9 +730,14 @@
       frameId: 'pv-frame-1',
       title: 'TALES OF KLAKE — PV',
       desc: '突然の部署解体から始まるミチヒロの物語。家族の絆と成長を描いたシリーズ第2作のプロモーションビデオ。'
+    },
+    {
+      frameId: 'pv-frame-2',
+      title: 'TALES OF PLAKE — PV',
+      desc: 'ポイ活が人生を動かす、三重を舞台にした日常系ハートフルRPG。シリーズ第3作のプロモーションビデオ。'
     }
-    // PLAKEのPV URLが決まったらここに追加:
-    // { frameId: 'pv-frame-2', title: 'TALES OF PLAKE — PV', desc: '...' }
+    // YRLAKEのPV URLが決まったらここに追加:
+    // { frameId: 'pv-frame-3', title: 'TALES OF YRLAKE — PV', desc: '...' }
   ];
 
   function selectPV(idx) {
